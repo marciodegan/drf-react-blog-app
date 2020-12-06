@@ -1,0 +1,1 @@
+A blog app with DRF and react at the front-end
