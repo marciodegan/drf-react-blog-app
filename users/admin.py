@@ -29,4 +29,4 @@ class UserAdminConfig(UserAdmin):
     )
 
 
-admin.site.register(NewUser, UserAdminConfig)
+admin.site.register(CustomUser, UserAdminConfig)
