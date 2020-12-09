@@ -2,7 +2,7 @@ from rest_framework import generics
 from blog.models import Post
 from .serializers import PostSerializer
 from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAdminUser, DjangoModelPermissionsOrAnonReadOnly, DjangoModelPermissions, IsAuthenticatedOrReadOnly, IsAuthenticated
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -59,16 +59,55 @@ class PostList(generics.ListAPIView):
         return Post.objects.filter(author=user)
 
 
-class PostDetail(generics.ListAPIView):
-    # permission_classes = [PostUserWritePermission]
-    # queryset = Post.objects.all()
+class PostDetail(generics.RetrieveAPIView):
     serializer_class = PostSerializer
 
-    def get_queryset(self, queryset=None, **kwargs):
-        slug = self.kwargs.get('pk')
-        return get_object_or_404(Post, slug=slug)
+    def get_queryset(self):
+        slug = self.request.query_params.get('slug', None)
+        print(slug)
+        return Post.objects.filter(slug=slug)
 
 
+# REST FRAMEWORK FILTERS
+class PostListDetailFilter(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^slug']
+
+# the url's like this: http://127.0.0.1:8000/api/search/custom/?search=post
+
+    # '^' Starts-with search.
+    # '=' Exact matches.
+    # '@' Full-text search. (Currently only supported Django's PostgreSQL backend.)
+    # '$' Regex search.
+
+# class PostDetail(generics.RetrieveAPIView):
+#     serializer_class = PostSerializer
+#     # collecting data from the url
+#     # specifing the data to get from slug
+#     def get_queryset(self):
+#         slug = self.request.query_params.get('slug', None)
+#         return Post.objects.filter(slug=slug)
+
+
+
+# class PostDetail(generics.RetrieveApiView):
+#     # permission_classes = [PostUserWritePermission]
+#     # queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+
+#     def get_queryset(self, queryset=None, **kwargs):
+#         slug = self.kwargs.get('pk')
+#         return get_object_or_404(Post, slug=slug)
+
+
+# class PostSearch(generics.ListAPIView):
+#     # permission_classes = [AllowAny]
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+#     filter_backends = [filters.SearchFilter]
+#     search_fields = ['^slug']
 
 # class PostDetail(generics.RetrieveAPIView, PostUserWritePermission):
 #     permission_classes = [PostUserWritePermission]
