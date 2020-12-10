@@ -2,18 +2,18 @@ from rest_framework import generics
 from blog.models import Post
 from .serializers import PostSerializer
 from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAdminUser, DjangoModelPermissionsOrAnonReadOnly, DjangoModelPermissions, IsAuthenticatedOrReadOnly, IsAuthenticated
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, generics, permissions
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 
-class PostUserWritePermission(BasePermission):
-    message = 'Edição restrita ao autor'
+# class PostUserWritePermission(BasePermission):
+#     message = 'Edição restrita ao autor'
 
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
-        return obj.author == request.user
+#     def has_object_permission(self, request, view, obj):
+#         if request.method in SAFE_METHODS:
+#             return True
+#         return obj.author == request.user
 
 
 # VIEWSETS.MODELVIEWSET
@@ -74,6 +74,34 @@ class PostListDetailFilter(generics.ListAPIView):
     serializer_class = PostSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['^slug']
+
+
+# REST FRAMEWORK CRUD
+class CreatePost(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    
+
+class AdminPostDetail(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class EditPost(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class DeletePost(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+
 
 # the url's like this: http://127.0.0.1:8000/api/search/custom/?search=post
 
