@@ -1,8 +1,8 @@
-# BLOG - Django Rest-Framework + React
+### BLOG - Django Rest-Framework + React
 
-## Mini projeto de um Blog com base no tutorial do canal VeryAcademy
+#### This is a small blog project done following VeryAcademy channel tutorial
 
-### Realizado com objetivo à melhorar compreensão sobre como o React se comunica com Django RestFramework.
+#### Main objective was to better understand how React frontend communicates with Django RestFramework
 
-### API em Django Rest c/ autenticação JWT e front-end em React de um blog com funcionalidades CRUD. 
+#### It includes Django Rest API w/ JWT Authentication and React front-end with CRUD funcions. 
 
