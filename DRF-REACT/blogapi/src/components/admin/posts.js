@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 const Posts = (props) => {
 	const { posts } = props;
 	const classes = useStyles();
-	if (!posts || posts.length === 0) return <p>Can not find any posts, sorry</p>;
+	if (!posts || posts.length === 0) return <p>Nenhum post encontrado...</p>;
 	return (
 		<React.Fragment>
 			<Container maxWidth="md" component="main">
@@ -53,9 +53,9 @@ const Posts = (props) => {
 							<TableHead>
 								<TableRow>
 									<TableCell>Id</TableCell>
-									<TableCell align="left">Category</TableCell>
-									<TableCell align="left">Title</TableCell>
-									<TableCell align="left">Action</TableCell>
+									<TableCell align="left">Categoria</TableCell>
+									<TableCell align="left">Título</TableCell>
+									<TableCell align="left">Ação</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -103,7 +103,7 @@ const Posts = (props) => {
 											variant="contained"
 											color="primary"
 										>
-											New Post
+											Novo Post
 										</Button>
 									</TableCell>
 								</TableRow>

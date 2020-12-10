@@ -21,7 +21,7 @@ function Admin() {
 
 	return (
 		<div className="App">
-			<h1>Latest Posts</h1>
+			<h1>Últimos Posts</h1>
 			<PostLoading isLoading={appState.loading} posts={appState.posts} />
 		</div>
 	);

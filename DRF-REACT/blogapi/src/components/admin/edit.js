@@ -94,7 +94,7 @@ export default function Create() {
 								required
 								fullWidth
 								id="title"
-								label="Post Title"
+								label="Título"
 								name="title"
 								autoComplete="title"
 								value={formData.title}
@@ -107,7 +107,7 @@ export default function Create() {
 								required
 								fullWidth
 								id="excerpt"
-								label="Post Excerpt"
+								label="Resumo"
 								name="excerpt"
 								autoComplete="excerpt"
 								value={formData.excerpt}
@@ -135,7 +135,7 @@ export default function Create() {
 								required
 								fullWidth
 								id="content"
-								label="content"
+								label="Conteúdo"
 								name="content"
 								autoComplete="content"
 								value={formData.content}
