@@ -6,3 +6,5 @@
 
 #### It includes Django Rest API w/ JWT Authentication and React front-end with CRUD funcions. 
 
+<img src="screenshot.png" alt="">
+<img src="screenshot-schema.png" alt="">
